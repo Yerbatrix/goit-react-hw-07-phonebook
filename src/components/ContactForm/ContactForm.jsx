@@ -5,7 +5,7 @@ import css from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const contacts = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
 
@@ -13,15 +13,15 @@ const ContactForm = () => {
     const { name, value } = evt.target;
     if (name === 'name') {
       setName(value);
-    } else if (name === 'number') {
-      setNumber(value);
+    } else if (name === 'phone') {
+      setPhone(value);
     }
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    if (name.trim() === '' || number.trim() === '') return;
+    if (name.trim() === '' || phone.trim() === '') return;
 
     const isDuplicate = contacts.some(contact => contact.name === name);
     if (isDuplicate) {
@@ -29,9 +29,9 @@ const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ name, phone }));
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -49,15 +49,15 @@ const ContactForm = () => {
             required
           />
         </label>
-        <label htmlFor="numberInput">
+        <label htmlFor="phoneInput">
           Phone number
           <input
             type="tel"
-            name="number"
-            id="numberInput"
+            name="phone"
+            id="phoneInput"
             pattern="^[0-9]{1,3}[-\s]?[0-9]{1,14}$"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            value={number}
+            value={phone}
             onChange={handleChange}
             placeholder="Enter phone number"
             required
