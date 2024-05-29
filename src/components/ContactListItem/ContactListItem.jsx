@@ -10,23 +10,21 @@ const ContactListItem = ({ contact }) => {
     dispatch(deleteContact(id));
   };
 
-  const formattedDate = format(
-    new Date(contact.createdAt),
-    'dd MMM yyyy, HH:mm'
+  const formattedDate = new Date(contact.createdAt).toLocaleDateString(
+    'en-US',
+    {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }
   );
 
   return (
     <li className={css.item}>
-      <div className={css.contactDetails}>
-        <p className={css.name}>
-          <strong>Name:</strong> {contact.name}
-        </p>
-        <p className={css.phone}>
-          <strong>Phone:</strong> {contact.phone}
-        </p>
-        <p className={css.date}>
-          <strong>Created At:</strong> {formattedDate}
-        </p>
+      <div className={css.details}>
+        <span className={css.date}>{formattedDate}</span>
+        <span className={css.name}>{contact.name}</span>
+        <span className={css.phone}>{contact.phone}</span>
       </div>
       <button
         className={css.button}
