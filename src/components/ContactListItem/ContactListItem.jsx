@@ -2,7 +2,6 @@ import React from 'react';
 import css from './ContactListItem.module.css';
 import { deleteContact } from '../../redux/operations';
 import { useDispatch } from 'react-redux';
-import { format } from 'date-fns';
 
 const ContactListItem = ({ contact }) => {
   const dispatch = useDispatch();
